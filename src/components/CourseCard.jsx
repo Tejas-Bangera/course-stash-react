@@ -14,9 +14,7 @@ const CourseCard = ({
   _id,
 }) => {
   const { isLoggedIn: isAdminLoggedIn } = useSelector(
-    ({ admin: { isLoggedIn } }) => ({
-      isLoggedIn,
-    })
+    (state) => state.admin.isLoggedIn
   );
   const { isLoggedIn: isUserLoggedIn, cart } = useSelector(
     (state) => state.user
@@ -43,7 +41,7 @@ const CourseCard = ({
         <p>{description}</p>
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-y-1">
-            <p className="text-xs lg:text-sm text-gray-600">{author}</p>
+            <p className="text-xs lg:text-sm text-gray-600">By {author}</p>
             {isAdminLoggedIn && (
               <p className="text-xs lg:text-sm text-gray-600">
                 Published: {published ? "Yes" : "No"}

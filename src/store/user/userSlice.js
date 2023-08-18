@@ -33,14 +33,17 @@ export const userSlice = createSlice({
       });
     },
     addToCart: (state, action) => {
-      state.cart.push(action.payload);
+      const course = action.payload;
+      state.cart.push(course);
       state.cartQuantity += 1;
-      state.cartTotal += action.payload.price;
+      state.cartTotal += course.price;
     },
     removeFromCart: (state, action) => {
-      state.cart = state.cart.filter((course) => course.id != action.payload);
+      const course = action.payload;
+      const updatedCart = state.cart.filter((item) => item._id !== course._id);
+      state.cart = [...updatedCart];
       state.cartQuantity -= 1;
-      state.cartTotal -= action.payload.price;
+      state.cartTotal -= course.price;
     },
   },
 });
