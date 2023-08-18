@@ -1,4 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import EditButton from "./EditButton";
+import AddToCartButton from "./AddToCartButton";
+import GoToCartButton from "./GoToCartButton";
+import { useEffect, useState } from "react";
 
 const CourseCard = ({
   title,
@@ -7,9 +11,26 @@ const CourseCard = ({
   author,
   imageLink,
   published,
-  id,
-  role,
+  _id,
 }) => {
+  const { isLoggedIn: isAdminLoggedIn } = useSelector(
+    ({ admin: { isLoggedIn } }) => ({
+      isLoggedIn,
+    })
+  );
+  const { isLoggedIn: isUserLoggedIn, cart } = useSelector(
+    (state) => state.user
+  );
+
+  const course = {
+    _id,
+    title,
+    description,
+    price,
+    author,
+    imageLink,
+  };
+
   return (
     <div className="bg-white flex flex-col gap-y-2 h-max">
       <img
@@ -23,18 +44,22 @@ const CourseCard = ({
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-y-1">
             <p className="text-xs lg:text-sm text-gray-600">{author}</p>
-            <p className="text-xs lg:text-sm text-gray-600">
-              Published: {published ? "Yes" : "No"}
-            </p>
+            {isAdminLoggedIn && (
+              <p className="text-xs lg:text-sm text-gray-600">
+                Published: {published ? "Yes" : "No"}
+              </p>
+            )}
             <p className="font-bold">${price}</p>
           </div>
-          {role === "admin" && (
-            <NavLink
-              to={`../admin/${id}/edit`}
-              className="primary-button self-end"
-            >
-              Edit
-            </NavLink>
+          {isAdminLoggedIn ? (
+            <EditButton id={id} />
+          ) : (
+            isUserLoggedIn &&
+            (cart.find((item) => item._id === _id) ? (
+              <GoToCartButton />
+            ) : (
+              <AddToCartButton course={course} />
+            ))
           )}
         </div>
       </div>

@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return (
     // <div className="bg-white flex items-center justify-between py-4 px-3 shadow-md mb-3 w-full max-w-screen-2xl self-center">
-    <header className="bg-white w-full shadow-md p-4">
+    <header className="bg-white w-full shadow-md p-4 z-10">
       <div className="flex items-center justify-between w-full max-w-screen-2xl mx-auto">
         <Brand />
         <nav>

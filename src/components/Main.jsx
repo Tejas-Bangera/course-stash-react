@@ -2,15 +2,40 @@ import { useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "../store/user/userSlice";
 
 const Main = () => {
   const [courses, setCourses] = useState([]);
+  const isUserLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
+  const getAllCourses = () => {
     axios
       .get("http://localhost:3000/users/courses")
       .then((response) => setCourses(response.data.courses))
       .catch((error) => console.log(error));
+  };
+
+  const getCartCourses = () => {
+    axios
+      .get("http://localhost:3000/users/cart", {
+        headers: {
+          Authorization: localStorage.getItem("user-token"),
+        },
+      })
+      .then((response) => {
+        const { cart } = response.data;
+        dispatch(setCart(cart));
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getAllCourses();
+    if (isUserLoggedIn) {
+      getCartCourses();
+    }
   }, []);
 
   return (
@@ -44,14 +69,13 @@ const Main = () => {
             {courses.map((course, index) => (
               <CourseCard
                 key={index}
-                id={course._id}
+                _id={course._id}
                 title={course.title}
                 description={course.description}
                 price={course.price}
                 author={course.author}
                 imageLink={course.imageLink}
                 published={course.published}
-                role={"user"}
               />
             ))}
           </div>
