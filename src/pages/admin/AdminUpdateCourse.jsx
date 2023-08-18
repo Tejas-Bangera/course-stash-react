@@ -31,16 +31,47 @@ const AdminUpdateCourse = () => {
         setPublished(course.published);
       });
   }, []);
-  function updateCourse() {}
+  function updateCourse(event) {
+    event.preventDefault();
+
+    axios
+      .put(
+        `http://localhost:3000/admin/courses/${courseId}`,
+        {
+          title,
+          description,
+          price,
+          author: username,
+          imageLink,
+          published,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("admin-token"),
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+  }
 
   return (
     <div className="section-padding flex flex-col gap-5 w-full max-w-lg mx-auto lg:flex-row lg:max-w-4xl">
       <CourseForm
-        title={title}
-        description={description}
-        price={price}
-        imageLink={imageLink}
-        published={published}
+        {...{
+          title,
+          setTitle,
+          description,
+          setDescription,
+          price,
+          setPrice,
+          imageLink,
+          setImageLink,
+          published,
+          setPublished,
+        }}
         handleSubmit={updateCourse}
         action={"update"}
       />
@@ -53,7 +84,7 @@ const AdminUpdateCourse = () => {
           imageLink={imageLink}
           published={published}
           author={username}
-          role={"admin"}
+          role={"admin-editing"}
         />
       </div>
     </div>
