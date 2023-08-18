@@ -1,17 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
 import Brand from "./Brand";
 import { NavLink, useNavigate } from "react-router-dom";
-import { logout } from "../store/admin/adminSlice";
+import { logout as adminLogout } from "../store/admin/adminSlice";
+import { logout as userLogout } from "../store/user/userSlice";
 
 const Navbar = () => {
-  const { username, isLoggedIn } = useSelector((state) => state.admin);
+  const { username: adminUsername, isLoggedIn: isAdminLoggedIn } = useSelector(
+    (state) => state.admin
+  );
+  const { username, isLoggedIn: isUserLoggedIn } = useSelector(
+    (state) => state.user
+  );
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function handleLogout(event) {
     event.preventDefault();
-    dispatch(logout());
-    localStorage.removeItem("admin-token");
+    dispatch(isAdminLoggedIn ? adminLogout() : userLogout());
+    localStorage.removeItem(isAdminLoggedIn ? "admin-token" : "user-token");
     navigate("/");
   }
 
@@ -22,7 +29,35 @@ const Navbar = () => {
         <Brand />
         <nav>
           <ul className="flex items-center gap-x-4">
-            {!isLoggedIn ? (
+            {isAdminLoggedIn ? (
+              <>
+                <li className="text-sm">{adminUsername}</li>
+                <li>
+                  <button className="secondary-button" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : isUserLoggedIn ? (
+              <>
+                <li className="text-sm">{username}</li>
+                <li>
+                  <NavLink to={"user/courses"} className="underline">
+                    My Courses
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={"user/cart"} className="secondary-button">
+                    Cart
+                  </NavLink>
+                </li>
+                <li>
+                  <button className="secondary-button" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
               <>
                 <li>
                   <NavLink to={"admin/login"} className="underline">
@@ -38,15 +73,6 @@ const Navbar = () => {
                   <NavLink to={"users/signup"} className="primary-button">
                     Signup
                   </NavLink>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className="text-sm">{username}</li>
-                <li>
-                  <button className="secondary-button" onClick={handleLogout}>
-                    Logout
-                  </button>
                 </li>
               </>
             )}

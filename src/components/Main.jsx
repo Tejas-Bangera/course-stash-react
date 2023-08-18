@@ -1,7 +1,18 @@
+import { useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const Main = () => {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/users/courses")
+      .then((response) => setCourses(response.data.courses))
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     // <main className="flex flex-col items-center w-full max-w-6xl border border-red-600">
     <main className="flex flex-col items-center">
@@ -30,12 +41,19 @@ const Main = () => {
             month.
           </p>
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-5">
-            <CourseCard id={1} role={"user"} />
-            <CourseCard id={1} role={"user"} />
-            <CourseCard id={1} role={"user"} />
-            <CourseCard id={1} role={"user"} />
-            <CourseCard id={1} role={"user"} />
-            <CourseCard id={1} role={"user"} />
+            {courses.map((course, index) => (
+              <CourseCard
+                key={index}
+                id={course._id}
+                title={course.title}
+                description={course.description}
+                price={course.price}
+                author={course.author}
+                imageLink={course.imageLink}
+                published={course.published}
+                role={"user"}
+              />
+            ))}
           </div>
         </div>
       </section>
