@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import EditButton from "./EditButton";
 import AddToCartButton from "./AddToCartButton";
 import GoToCartButton from "./GoToCartButton";
-import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const CourseCard = ({
   title,
@@ -14,9 +14,11 @@ const CourseCard = ({
   _id,
 }) => {
   const isAdminLoggedIn = useSelector((state) => state.admin.isLoggedIn);
-  const { isLoggedIn: isUserLoggedIn, cart } = useSelector(
-    (state) => state.user
-  );
+  const {
+    isLoggedIn: isUserLoggedIn,
+    cart,
+    courses: useCourses,
+  } = useSelector((state) => state.user);
 
   const course = {
     _id,
@@ -53,6 +55,13 @@ const CourseCard = ({
             isUserLoggedIn &&
             (cart.find((item) => item._id === _id) ? (
               <GoToCartButton />
+            ) : useCourses.find((item) => item._id === _id) ? (
+              <NavLink
+                to={"user/courses"}
+                className="secondary-button self-end"
+              >
+                View
+              </NavLink>
             ) : (
               <AddToCartButton course={course} />
             ))

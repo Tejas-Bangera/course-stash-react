@@ -3,7 +3,7 @@ import CourseCard from "./CourseCard";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "../store/user/userSlice";
+import { setCourses as setUserCourses, setCart } from "../store/user/userSlice";
 
 const Main = () => {
   const [courses, setCourses] = useState([]);
@@ -31,10 +31,25 @@ const Main = () => {
       .catch((error) => console.log(error));
   };
 
+  const getUserCourses = () => {
+    axios
+      .get("http://localhost:3000/users/purchasedCourses", {
+        headers: {
+          Authorization: localStorage.getItem("user-token"),
+        },
+      })
+      .then((response) => {
+        const { purchasedCourses } = response.data;
+        dispatch(setUserCourses(purchasedCourses));
+      })
+      .catch((error) => console.log(error));
+  };
+
   useEffect(() => {
     getAllCourses();
     if (isUserLoggedIn) {
       getCartCourses();
+      getUserCourses();
     }
   }, []);
 

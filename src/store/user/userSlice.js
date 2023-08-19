@@ -14,9 +14,6 @@ export const userSlice = createSlice({
     setUsername: (state, action) => {
       state.username = action.payload;
     },
-    setCourses: (state, action) => {
-      state.courses = action.payload;
-    },
     login: (state) => {
       state.isLoggedIn = true;
     },
@@ -45,18 +42,26 @@ export const userSlice = createSlice({
       state.cartQuantity -= 1;
       state.cartTotal -= course.price;
     },
+    setCourses: (state, action) => {
+      state.courses = action.payload;
+    },
+    addCourses: (state, action) => {
+      const addCoursesList = action.payload;
+      state.courses.push(...addCoursesList);
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
 export const {
   setUsername,
-  setCourses,
   login,
   logout,
   setCart,
   addToCart,
   removeFromCart,
+  setCourses,
+  addCourses,
 } = userSlice.actions;
 
 export default userSlice.reducer;

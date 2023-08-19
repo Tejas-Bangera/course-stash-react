@@ -34,6 +34,7 @@ const AdminCreateCourse = () => {
         }
       )
       .then((response) => {
+        console.log(response.data);
         dispatch(setCourses(response.data.courses));
         setTitle("");
         setDescription("");

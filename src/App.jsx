@@ -16,6 +16,7 @@ import Landing from "./pages/Landing";
 import AdminCourses from "./pages/admin/AdminCourses";
 import AdminUpdateCourse from "./pages/admin/AdminUpdateCourse";
 import AdminCreateCourse from "./pages/admin/AdminCreateCourse";
+import UserCourses from "./pages/users/UserCourses";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,13 +24,14 @@ const router = createBrowserRouter(
       <Route index element={<Landing />} />
       <Route path="users/login" element={<UserLogin />} />
       <Route path="users/signup" element={<UserSignUp />} />
+      <Route path="user/cart" element={<UserCart />} />
+      <Route path="user/courses" element={<UserCourses />} />
       <Route path="admin/login" element={<AdminLogin />} />
       <Route path="admin/signup" element={<AdminSignUp />} />
       <Route path="admin/courses" element={<AdminCourses />}>
         <Route path="create" element={<AdminCreateCourse />} />
       </Route>
       <Route path="admin/:id/edit" element={<AdminUpdateCourse />} />
-      <Route path="user/cart" element={<UserCart />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   )

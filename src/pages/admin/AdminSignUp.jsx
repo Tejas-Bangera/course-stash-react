@@ -4,6 +4,15 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import {
+  login as adminLogin,
+  logout as adminLogout,
+  setUsername as setAdminUsername,
+} from "../../store/admin/adminSlice";
+import {
+  logout as userLogout,
+  setUsername,
+} from "../../store/admin/adminSlice";
 
 const AdminSignUp = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +23,16 @@ const AdminSignUp = () => {
   function handleSubmit(event) {
     event.preventDefault();
 
+    // Logout previous user
+    dispatch(userLogout());
+    dispatch(setUsername(""));
+    localStorage.removeItem("user-token");
+
+    // Logout previous admin
+    dispatch(adminLogout());
+    dispatch(setAdminUsername(""));
+    localStorage.removeItem("admin-token");
+
     axios
       .post("http://localhost:3000/admin/signup", {
         username: email,
@@ -22,7 +41,7 @@ const AdminSignUp = () => {
       .then((response) => {
         localStorage.setItem("admin-token", "Bearer " + response.data.token);
         dispatch(setUsername(email));
-        dispatch(login());
+        dispatch(adminLogin());
         setEmail("");
         navigate("/admin/courses");
       })
