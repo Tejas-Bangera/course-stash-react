@@ -3,6 +3,8 @@ import Brand from "./Brand";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout as adminLogout } from "../store/admin/adminSlice";
 import { logout as userLogout } from "../store/user/userSlice";
+import DropdownButton from "./DropdownButton";
+import NavMenuItems from "./NavMenuItems";
 
 const Navbar = () => {
   const { username: adminUsername, isLoggedIn: isAdminLoggedIn } = useSelector(
@@ -27,57 +29,24 @@ const Navbar = () => {
     <header className="bg-white w-full shadow-md p-4 z-10">
       <div className="flex items-center justify-between w-full max-w-screen-2xl mx-auto">
         <Brand />
-        <nav>
-          <ul className="flex items-center gap-x-4">
-            {isAdminLoggedIn ? (
-              <>
-                <li className="text-sm">{adminUsername}</li>
-                <li>
-                  <button className="secondary-button" onClick={handleLogout}>
-                    Logout
-                  </button>
-                </li>
-              </>
-            ) : isUserLoggedIn ? (
-              <>
-                <li className="text-sm">{username}</li>
-                <li>
-                  <NavLink to={"user/courses"} className="underline">
-                    My Courses
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to={"user/cart"} className="secondary-button">
-                    Cart
-                  </NavLink>
-                </li>
-                <li>
-                  <button className="secondary-button" onClick={handleLogout}>
-                    Logout
-                  </button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <NavLink to={"admin/login"} className="underline">
-                    Instructor?
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="users/login" className="secondary-button">
-                    Login
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to={"users/signup"} className="primary-button">
-                    Signup
-                  </NavLink>
-                </li>
-              </>
-            )}
-          </ul>
-        </nav>
+        <div className="md:hidden">
+          <DropdownButton
+            isAdminLoggedIn={isAdminLoggedIn}
+            adminUsername={adminUsername}
+            isUserLoggedIn={isUserLoggedIn}
+            username={username}
+            handleLogout={handleLogout}
+          />
+        </div>
+        <div className="hidden md:block">
+          <NavMenuItems
+            isAdminLoggedIn={isAdminLoggedIn}
+            adminUsername={adminUsername}
+            isUserLoggedIn={isUserLoggedIn}
+            username={username}
+            handleLogout={handleLogout}
+          />
+        </div>
       </div>
     </header>
   );

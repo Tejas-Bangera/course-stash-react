@@ -13,9 +13,7 @@ const CourseCard = ({
   published,
   _id,
 }) => {
-  const { isLoggedIn: isAdminLoggedIn } = useSelector(
-    (state) => state.admin.isLoggedIn
-  );
+  const isAdminLoggedIn = useSelector((state) => state.admin.isLoggedIn);
   const { isLoggedIn: isUserLoggedIn, cart } = useSelector(
     (state) => state.user
   );
@@ -50,7 +48,7 @@ const CourseCard = ({
             <p className="font-bold">${price}</p>
           </div>
           {isAdminLoggedIn ? (
-            <EditButton id={id} />
+            <EditButton _id={_id} />
           ) : (
             isUserLoggedIn &&
             (cart.find((item) => item._id === _id) ? (

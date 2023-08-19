@@ -45,5 +45,8 @@
   .form-input {
     @apply border border-black p-2;
   }
+  .nav-item {
+    @apply p-2 hover:bg-[#f7f9fa] text-center;
+  }
   /* ... */
 }
