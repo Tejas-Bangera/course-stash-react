@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Brand from "./Brand";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout as adminLogout } from "../store/admin/adminSlice";
 import { logout as userLogout } from "../store/user/userSlice";
 import DropdownButton from "./DropdownButton";

@@ -67,10 +67,10 @@ const DropdownButton = ({
                   <NavLink to={"admin/login"} className="w-full">
                     <li className="nav-item underline">Instructor?</li>
                   </NavLink>
-                  <NavLink to="users/login" className="w-full">
+                  <NavLink to="user/login" className="w-full">
                     <li className="nav-item">Login</li>
                   </NavLink>
-                  <NavLink to={"users/signup"} className="w-full">
+                  <NavLink to={"user/signup"} className="w-full">
                     <li className="nav-item">Signup</li>
                   </NavLink>
                 </>

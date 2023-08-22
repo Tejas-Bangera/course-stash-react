@@ -36,7 +36,7 @@ const UserSignUp = () => {
         handleSubmit={handleSubmit}
       />
       <Link
-        to={"/users/login"}
+        to={"/user/login"}
         className="text-xs underline self-start mt-3 text-slate-500"
       >
         Already an user? Login

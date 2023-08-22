@@ -48,12 +48,12 @@ const NavMenuItems = ({
               </NavLink>
             </li>
             <li>
-              <NavLink to="users/login" className="secondary-button">
+              <NavLink to="user/login" className="secondary-button">
                 Login
               </NavLink>
             </li>
             <li>
-              <NavLink to={"users/signup"} className="primary-button">
+              <NavLink to={"user/signup"} className="primary-button">
                 Signup
               </NavLink>
             </li>
