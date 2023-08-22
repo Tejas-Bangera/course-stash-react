@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
+import CartIcon from "./CartIcon";
 
 const NavMenuItems = ({
   isAdminLoggedIn,
   isUserLoggedIn,
   adminUsername,
+  cartQuantity,
   handleLogout,
   username,
 }) => {
@@ -28,8 +30,8 @@ const NavMenuItems = ({
               </NavLink>
             </li>
             <li>
-              <NavLink to={"user/cart"} className="secondary-button">
-                Cart
+              <NavLink to={"user/cart"} className="">
+                <CartIcon cartQuantity={cartQuantity} />
               </NavLink>
             </li>
             <li>

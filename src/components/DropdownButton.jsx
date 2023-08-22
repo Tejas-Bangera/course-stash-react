@@ -5,6 +5,7 @@ const DropdownButton = ({
   isAdminLoggedIn,
   isUserLoggedIn,
   adminUsername,
+  cartQuantity,
   handleLogout,
   username,
 }) => {
@@ -46,7 +47,14 @@ const DropdownButton = ({
                     <li className="nav-item">My Courses</li>
                   </NavLink>
                   <NavLink to={"user/cart"} className="w-full">
-                    <li className="nav-item">Cart</li>
+                    <li className="nav-item flex items-center justify-center">
+                      <span className="mr-3">Cart</span>
+                      {cartQuantity > 0 && (
+                        <span className="text-xs text-white bg-slate-800 px-1 rounded-full">
+                          {cartQuantity}
+                        </span>
+                      )}
+                    </li>
                   </NavLink>
                   <li className="w-full nav-item">
                     <button className="w-full" onClick={handleLogout}>

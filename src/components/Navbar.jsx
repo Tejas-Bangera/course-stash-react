@@ -10,9 +10,11 @@ const Navbar = () => {
   const { username: adminUsername, isLoggedIn: isAdminLoggedIn } = useSelector(
     (state) => state.admin
   );
-  const { username, isLoggedIn: isUserLoggedIn } = useSelector(
-    (state) => state.user
-  );
+  const {
+    username,
+    isLoggedIn: isUserLoggedIn,
+    cartQuantity,
+  } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,6 +37,7 @@ const Navbar = () => {
             adminUsername={adminUsername}
             isUserLoggedIn={isUserLoggedIn}
             username={username}
+            cartQuantity={cartQuantity}
             handleLogout={handleLogout}
           />
         </div>
@@ -44,6 +47,7 @@ const Navbar = () => {
             adminUsername={adminUsername}
             isUserLoggedIn={isUserLoggedIn}
             username={username}
+            cartQuantity={cartQuantity}
             handleLogout={handleLogout}
           />
         </div>
