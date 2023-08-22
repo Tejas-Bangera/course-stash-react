@@ -1,8 +1,30 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserCourseCard from "../../components/UserCourseCard";
+import { setCourses as setUserCourses } from "../../store/user/userSlice";
+import { useEffect } from "react";
+import axios from "axios";
 
 const UserCourses = () => {
   const courses = useSelector((state) => state.user.courses);
+  const dispatch = useDispatch();
+
+  const getUserCourses = () => {
+    axios
+      .get(`${import.meta.env.VITE_NODE_URL}/users/purchasedCourses`, {
+        headers: {
+          Authorization: localStorage.getItem("user-token"),
+        },
+      })
+      .then((response) => {
+        const { purchasedCourses } = response.data;
+        dispatch(setUserCourses(purchasedCourses));
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getUserCourses();
+  }, []);
 
   return (
     <main className="w-full max-w-6xl flex flex-col items-center p-10 mx-auto gap-y-10">

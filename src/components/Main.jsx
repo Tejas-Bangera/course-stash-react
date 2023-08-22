@@ -54,7 +54,6 @@ const Main = () => {
   }, []);
 
   return (
-    // <main className="flex flex-col items-center w-full max-w-6xl border border-red-600">
     <main className="flex flex-col items-center">
       {/* Brand section */}
       <section className="flex justify-center p-10 max-w-6xl">
@@ -91,6 +90,7 @@ const Main = () => {
                 author={course.author}
                 imageLink={course.imageLink}
                 published={course.published}
+                path={`../admin/${course._id}/edit`}
               />
             ))}
           </div>

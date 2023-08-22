@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CartCourseCard from "../../components/CartCourseCard";
 import { addCourses, setCart } from "../../store/user/userSlice";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ErrorAlert from "../../components/ErrorAlert";
 import SuccessAlert from "../../components/SuccessAlert";
 
@@ -13,6 +13,24 @@ const UserCart = () => {
   const [toggleSuccess, setToggleSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("Checkout successful!");
   const dispatch = useDispatch();
+
+  const getCartCourses = () => {
+    axios
+      .get(`${import.meta.env.VITE_NODE_URL}/users/cart`, {
+        headers: {
+          Authorization: localStorage.getItem("user-token"),
+        },
+      })
+      .then((response) => {
+        const { cart } = response.data;
+        dispatch(setCart(cart));
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getCartCourses();
+  }, []);
 
   function handleCheckout() {
     const courseIDs = cart.map((item) => item._id);

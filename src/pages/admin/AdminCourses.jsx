@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import CourseCard from "../../components/CourseCard";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { setCourses } from "../../store/admin/adminSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -51,7 +51,7 @@ const AdminCourses = () => {
                 author={course.author}
                 imageLink={course.imageLink}
                 published={course.published}
-                role={"admin"}
+                path={`../${course._id}/edit`}
               />
             ))}
           </div>

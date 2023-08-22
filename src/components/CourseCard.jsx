@@ -12,6 +12,7 @@ const CourseCard = ({
   imageLink,
   published,
   _id,
+  path,
 }) => {
   const { isLoggedIn: isAdminLoggedIn, courses: adminCourses } = useSelector(
     (state) => state.admin
@@ -52,7 +53,7 @@ const CourseCard = ({
             <p className="font-bold">${price}</p>
           </div>
           {isAdminLoggedIn && adminCourses.find((item) => item._id === _id) ? (
-            <EditButton _id={_id} />
+            <EditButton path={path} />
           ) : (
             isUserLoggedIn &&
             (cart.find((item) => item._id === _id) ? (
