@@ -11,7 +11,7 @@ const AdminCourses = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/admin/courses", {
+      .get(`${import.meta.env.VITE_NODE_URL}/admin/courses`, {
         headers: {
           username,
           Authorization: localStorage.getItem("admin-token"),
@@ -41,10 +41,10 @@ const AdminCourses = () => {
           </header>
 
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-5">
-            {courses.map((course, index) => (
+            {courses.map((course) => (
               <CourseCard
-                key={index}
-                id={course._id}
+                key={course._id}
+                _id={course._id}
                 title={course.title}
                 description={course.description}
                 price={course.price}

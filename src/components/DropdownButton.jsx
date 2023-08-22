@@ -36,6 +36,9 @@ const DropdownButton = ({
               {isAdminLoggedIn ? (
                 <>
                   <li className="text-sm nav-item">{adminUsername}</li>
+                  <NavLink to={"admin/courses"} className="w-full">
+                    <li className="nav-item">My Courses</li>
+                  </NavLink>
                   <button className="w-full" onClick={handleLogout}>
                     <li className="nav-item">Logout</li>
                   </button>

@@ -35,7 +35,7 @@ const AdminLogin = () => {
     localStorage.removeItem("admin-token");
 
     axios
-      .post("http://localhost:3000/admin/login", null, {
+      .post(`${import.meta.env.VITE_NODE_URL}/admin/login`, null, {
         headers: {
           username: email,
           password,

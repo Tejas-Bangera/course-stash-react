@@ -37,7 +37,7 @@ const AdminSignUp = () => {
     localStorage.removeItem("admin-token");
 
     axios
-      .post("http://localhost:3000/admin/signup", {
+      .post(`${import.meta.env.VITE_NODE_URL}/admin/signup`, {
         username: email,
         password,
       })

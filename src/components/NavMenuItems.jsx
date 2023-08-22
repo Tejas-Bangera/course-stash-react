@@ -16,6 +16,11 @@ const NavMenuItems = ({
           <>
             <li className="text-sm">{adminUsername}</li>
             <li>
+              <NavLink to={"admin/courses"} className="underline">
+                My Courses
+              </NavLink>
+            </li>
+            <li>
               <button className="secondary-button" onClick={handleLogout}>
                 Logout
               </button>

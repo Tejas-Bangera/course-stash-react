@@ -13,11 +13,13 @@ const CourseCard = ({
   published,
   _id,
 }) => {
-  const isAdminLoggedIn = useSelector((state) => state.admin.isLoggedIn);
+  const { isLoggedIn: isAdminLoggedIn, courses: adminCourses } = useSelector(
+    (state) => state.admin
+  );
   const {
     isLoggedIn: isUserLoggedIn,
     cart,
-    courses: useCourses,
+    courses: userCourses,
   } = useSelector((state) => state.user);
 
   const course = {
@@ -49,13 +51,13 @@ const CourseCard = ({
             )}
             <p className="font-bold">${price}</p>
           </div>
-          {isAdminLoggedIn ? (
+          {isAdminLoggedIn && adminCourses.find((item) => item._id === _id) ? (
             <EditButton _id={_id} />
           ) : (
             isUserLoggedIn &&
             (cart.find((item) => item._id === _id) ? (
               <GoToCartButton />
-            ) : useCourses.find((item) => item._id === _id) ? (
+            ) : userCourses.find((item) => item._id === _id) ? (
               <NavLink
                 to={"user/courses"}
                 className="secondary-button self-end"

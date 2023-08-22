@@ -12,14 +12,14 @@ const Main = () => {
 
   const getAllCourses = () => {
     axios
-      .get("http://localhost:3000/users/courses")
+      .get(`${import.meta.env.VITE_NODE_URL}/users/courses`)
       .then((response) => setCourses(response.data.courses))
       .catch((error) => console.log(error));
   };
 
   const getCartCourses = () => {
     axios
-      .get("http://localhost:3000/users/cart", {
+      .get(`${import.meta.env.VITE_NODE_URL}/users/cart`, {
         headers: {
           Authorization: localStorage.getItem("user-token"),
         },
@@ -33,7 +33,7 @@ const Main = () => {
 
   const getUserCourses = () => {
     axios
-      .get("http://localhost:3000/users/purchasedCourses", {
+      .get(`${import.meta.env.VITE_NODE_URL}/users/purchasedCourses`, {
         headers: {
           Authorization: localStorage.getItem("user-token"),
         },

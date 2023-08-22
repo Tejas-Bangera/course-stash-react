@@ -18,7 +18,7 @@ const UserCart = () => {
     const courseIDs = cart.map((item) => item._id);
     axios
       .post(
-        "http://localhost:3000/user/courses/all",
+        `${import.meta.env.VITE_NODE_URL}/user/courses/all`,
         { courses: courseIDs },
         {
           headers: {

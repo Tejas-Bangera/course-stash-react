@@ -17,7 +17,7 @@ const UserSignUp = () => {
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post("http://localhost:3000/users/signup", {
+      .post(`${import.meta.env.VITE_NODE_URL}/users/signup`, {
         username: email,
         password,
       })
