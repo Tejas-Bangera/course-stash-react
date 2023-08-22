@@ -13,10 +13,13 @@ import {
   logout as userLogout,
   setUsername,
 } from "../../store/admin/adminSlice";
+import ErrorAlert from "../../components/ErrorAlert";
 
 const AdminSignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [toggleError, setToggleError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("Something went wrong!");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,23 +48,34 @@ const AdminSignUp = () => {
         setEmail("");
         navigate("/admin/courses");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setToggleError(true);
+        setErrorMessage("Something went wrong!");
+      });
+  }
+
+  function toggle() {
+    setToggleError((prev) => !prev);
   }
 
   return (
-    <div className="flex flex-col section-padding lg:flex-row items-center lg:justify-center lg:items-start gap-8 w-full">
-      <div className="bg-white flex flex-col p-10 w-full max-w-md">
-        <h1>Sign Up</h1>
-        <Form
-          email={email}
-          password={password}
-          setEmail={setEmail}
-          setPassword={setPassword}
-          handleSubmit={handleSubmit}
-        />
+    <>
+      {toggleError && <ErrorAlert message={errorMessage} toggle={toggle} />}
+      <div className="flex flex-col section-padding lg:flex-row items-center lg:justify-center lg:items-start gap-8 w-full">
+        <div className="bg-white flex flex-col p-10 w-full max-w-md">
+          <h1>Sign Up</h1>
+          <Form
+            email={email}
+            password={password}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            handleSubmit={handleSubmit}
+          />
+        </div>
+        <AdminLoginBanner />
       </div>
-      <AdminLoginBanner />
-    </div>
+    </>
   );
 };
 export default AdminSignUp;
