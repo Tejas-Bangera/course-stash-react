@@ -7,7 +7,7 @@ const AddToCartButton = ({ course }) => {
 
   function handleAddToCart() {
     axios
-      .post(`${import.meta.env.VITE_NODE_URL}/users/cart/${course._id}`, null, {
+      .post(`${import.meta.env.VITE_NODE_URL}/user/cart/${course._id}`, null, {
         headers: {
           Authorization: localStorage.getItem("user-token"),
         },

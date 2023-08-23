@@ -8,7 +8,7 @@ const CartCourseCard = ({ _id, title, description, imageLink, price }) => {
 
   function handleRemove() {
     axios
-      .delete(`${import.meta.env.VITE_NODE_URL}/users/cart/${_id}`, {
+      .delete(`${import.meta.env.VITE_NODE_URL}/user/cart/${_id}`, {
         headers: {
           Authorization: localStorage.getItem("user-token"),
         },

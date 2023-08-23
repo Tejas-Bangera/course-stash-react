@@ -16,7 +16,7 @@ const UserCart = () => {
 
   const getCartCourses = () => {
     axios
-      .get(`${import.meta.env.VITE_NODE_URL}/users/cart`, {
+      .get(`${import.meta.env.VITE_NODE_URL}/user/cart`, {
         headers: {
           Authorization: localStorage.getItem("user-token"),
         },
@@ -36,8 +36,10 @@ const UserCart = () => {
     const courseIDs = cart.map((item) => item._id);
     axios
       .post(
-        `${import.meta.env.VITE_NODE_URL}/user/courses/all`,
-        { courses: courseIDs },
+        `${import.meta.env.VITE_NODE_URL}/user/courses/purchase/cart`,
+        {
+          courses: courseIDs,
+        },
         {
           headers: {
             Authorization: localStorage.getItem("user-token"),

@@ -10,7 +10,7 @@ const UserCourses = () => {
 
   const getUserCourses = () => {
     axios
-      .get(`${import.meta.env.VITE_NODE_URL}/users/purchasedCourses`, {
+      .get(`${import.meta.env.VITE_NODE_URL}/user/purchasedCourses`, {
         headers: {
           Authorization: localStorage.getItem("user-token"),
         },
