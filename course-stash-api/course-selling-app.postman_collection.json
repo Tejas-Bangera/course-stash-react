@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "5c263b81-11b5-4d9d-a193-99ae9799f90a",
+		"name": "course-selling-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "18858330"
+	},
+	"item": [
+		{
+			"name": "Admin Routes",
+			"item": [
+				{
+					"name": "Admin sign up",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "admin@gmail.com",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "passw0rd",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/admin/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin create course",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"React JS advanced course\",\r\n    \"description\": \"A advanced course for React JS\",\r\n    \"price\": 500,\r\n    \"imageLink\": \"some dummy link\",\r\n    \"published\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/courses"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin update course",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"An advanced course for React JS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/courses/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin get all courses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/admin/courses"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoicGFzc3cwcmQiLCJpYXQiOjE2OTE3NzU5MDMsImV4cCI6MTY5MTc3OTUwM30.RPYhYq1GqNsEkOSjZ9X48p2YYAB3zcVse3abiCsJ8-4"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User Routes",
+			"item": [
+				{
+					"name": "User signup",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/users/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "User login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "user",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "password",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "User get all courses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/users/courses"
+					},
+					"response": []
+				},
+				{
+					"name": "User purchase course by id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:3000/users/courses/1"
+					},
+					"response": []
+				},
+				{
+					"name": "User get all purchased courses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/users/purchasedCourses"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwicHVyY2hhc2VkQ291cnNlcyI6WzFdLCJpYXQiOjE2OTE3NzU4ODYsImV4cCI6MTY5MTc3OTQ4Nn0.LNxgzwMBIYNniXbt8dKAEQ7ImT95ApNZ1H7-rCjvYPE"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
