@@ -19,6 +19,7 @@ app.use("/admin", adminRouter);
 app.use("/user", userRouter);
 
 app.use(express.static("public"));
+// Api / endpoint to test connection
 app.get("/", (req, res) => res.json({ msg: "hello world" }));
 
 mongoose.connect(`${process.env.MONGO_DB_URL}/CourseWebsiteDB`);
